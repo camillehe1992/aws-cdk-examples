@@ -1,0 +1,912 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.88"
+        }
+      },
+      "ThreeTiersNetworkCdkStack": {
+        "id": "ThreeTiersNetworkCdkStack",
+        "path": "ThreeTiersNetworkCdkStack",
+        "children": {
+          "MainVpc": {
+            "id": "MainVpc",
+            "path": "ThreeTiersNetworkCdkStack/MainVpc",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPC",
+                  "aws:cdk:cloudformation:props": {
+                    "cidrBlock": "10.0.0.0/16",
+                    "enableDnsHostnames": true,
+                    "enableDnsSupport": true,
+                    "instanceTenancy": "default",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "main-vpc"
+                      },
+                      {
+                        "key": "Project",
+                        "value": "three-tiers-network-cdk"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPC",
+                  "version": "2.35.0"
+                }
+              },
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "availabilityZone": "ap-south-1a",
+                        "cidrBlock": "10.0.0.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPublicSubnet1RouteTableB35CB547"
+                        },
+                        "subnetId": {
+                          "Ref": "MainVpcPublicSubnet1Subnet269349B1"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPublicSubnet1RouteTableB35CB547"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "MainVpcIGW53625DB6"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "EIP": {
+                    "id": "EIP",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/EIP",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::EIP",
+                      "aws:cdk:cloudformation:props": {
+                        "domain": "vpc",
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnEIP",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "NATGateway": {
+                    "id": "NATGateway",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/NATGateway",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::NatGateway",
+                      "aws:cdk:cloudformation:props": {
+                        "subnetId": {
+                          "Ref": "MainVpcPublicSubnet1Subnet269349B1"
+                        },
+                        "allocationId": {
+                          "Fn::GetAtt": [
+                            "MainVpcPublicSubnet1EIP33B08611",
+                            "AllocationId"
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnNatGateway",
+                      "version": "2.35.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.35.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "availabilityZone": "ap-south-1b",
+                        "cidrBlock": "10.0.1.0/24",
+                        "mapPublicIpOnLaunch": true,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Public"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPublicSubnet2RouteTableE69B5772"
+                        },
+                        "subnetId": {
+                          "Ref": "MainVpcPublicSubnet2Subnet287D062B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPublicSubnet2RouteTableE69B5772"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "gatewayId": {
+                          "Ref": "MainVpcIGW53625DB6"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.35.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PublicSubnet",
+                  "version": "2.35.0"
+                }
+              },
+              "PrivateSubnet1": {
+                "id": "PrivateSubnet1",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "availabilityZone": "ap-south-1a",
+                        "cidrBlock": "10.0.2.0/28",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPrivateSubnet1RouteTable9385ABF4"
+                        },
+                        "subnetId": {
+                          "Ref": "MainVpcPrivateSubnet1SubnetA8D0757B"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPrivateSubnet1RouteTable9385ABF4"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "MainVpcPublicSubnet1NATGatewayEEC1F6AE"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.35.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.35.0"
+                }
+              },
+              "PrivateSubnet2": {
+                "id": "PrivateSubnet2",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2",
+                "children": {
+                  "Subnet": {
+                    "id": "Subnet",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/Subnet",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Subnet",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "availabilityZone": "ap-south-1b",
+                        "cidrBlock": "10.0.2.16/28",
+                        "mapPublicIpOnLaunch": false,
+                        "tags": [
+                          {
+                            "key": "aws-cdk:subnet-name",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "aws-cdk:subnet-type",
+                            "value": "Private"
+                          },
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnet",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "Acl": {
+                    "id": "Acl",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/Acl",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTable": {
+                    "id": "RouteTable",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/RouteTable",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::RouteTable",
+                      "aws:cdk:cloudformation:props": {
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2"
+                          },
+                          {
+                            "key": "Project",
+                            "value": "three-tiers-network-cdk"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRouteTable",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "RouteTableAssociation": {
+                    "id": "RouteTableAssociation",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/RouteTableAssociation",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SubnetRouteTableAssociation",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPrivateSubnet2RouteTable8E0D12CB"
+                        },
+                        "subnetId": {
+                          "Ref": "MainVpcPrivateSubnet2SubnetFC4F66C4"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSubnetRouteTableAssociation",
+                      "version": "2.35.0"
+                    }
+                  },
+                  "DefaultRoute": {
+                    "id": "DefaultRoute",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/DefaultRoute",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "routeTableId": {
+                          "Ref": "MainVpcPrivateSubnet2RouteTable8E0D12CB"
+                        },
+                        "destinationCidrBlock": "0.0.0.0/0",
+                        "natGatewayId": {
+                          "Ref": "MainVpcPublicSubnet1NATGatewayEEC1F6AE"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnRoute",
+                      "version": "2.35.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.PrivateSubnet",
+                  "version": "2.35.0"
+                }
+              },
+              "IGW": {
+                "id": "IGW",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/IGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::InternetGateway",
+                  "aws:cdk:cloudformation:props": {
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "main-vpc"
+                      },
+                      {
+                        "key": "Project",
+                        "value": "three-tiers-network-cdk"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInternetGateway",
+                  "version": "2.35.0"
+                }
+              },
+              "VPCGW": {
+                "id": "VPCGW",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/VPCGW",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::VPCGatewayAttachment",
+                  "aws:cdk:cloudformation:props": {
+                    "vpcId": {
+                      "Ref": "MainVpc919A5E7E"
+                    },
+                    "internetGatewayId": {
+                      "Ref": "MainVpcIGW53625DB6"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnVPCGatewayAttachment",
+                  "version": "2.35.0"
+                }
+              },
+              "S3": {
+                "id": "S3",
+                "path": "ThreeTiersNetworkCdkStack/MainVpc/S3",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ThreeTiersNetworkCdkStack/MainVpc/S3/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::VPCEndpoint",
+                      "aws:cdk:cloudformation:props": {
+                        "serviceName": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "com.amazonaws.",
+                              {
+                                "Ref": "AWS::Region"
+                              },
+                              ".s3"
+                            ]
+                          ]
+                        },
+                        "vpcId": {
+                          "Ref": "MainVpc919A5E7E"
+                        },
+                        "routeTableIds": [
+                          {
+                            "Ref": "MainVpcPrivateSubnet1RouteTable9385ABF4"
+                          },
+                          {
+                            "Ref": "MainVpcPrivateSubnet2RouteTable8E0D12CB"
+                          },
+                          {
+                            "Ref": "MainVpcPublicSubnet1RouteTableB35CB547"
+                          },
+                          {
+                            "Ref": "MainVpcPublicSubnet2RouteTableE69B5772"
+                          }
+                        ],
+                        "vpcEndpointType": "Gateway"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnVPCEndpoint",
+                      "version": "2.35.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.GatewayVpcEndpoint",
+                  "version": "2.35.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Vpc",
+              "version": "2.35.0"
+            }
+          },
+          "WebTierSecurityGroup": {
+            "id": "WebTierSecurityGroup",
+            "path": "ThreeTiersNetworkCdkStack/WebTierSecurityGroup",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ThreeTiersNetworkCdkStack/WebTierSecurityGroup/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "security group for web server",
+                    "groupName": "web-tier-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 22,
+                        "toPort": 22,
+                        "description": "allow SSH access from anywhere"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 80,
+                        "toPort": 80,
+                        "description": "allow HTTP traffic from anywhere on port 80"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "Project",
+                        "value": "three-tiers-network-cdk"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "MainVpc919A5E7E"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.35.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.35.0"
+            }
+          },
+          "AppTierSecurityGroup": {
+            "id": "AppTierSecurityGroup",
+            "path": "ThreeTiersNetworkCdkStack/AppTierSecurityGroup",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ThreeTiersNetworkCdkStack/AppTierSecurityGroup/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "security group for app server",
+                    "groupName": "app-tier-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "Project",
+                        "value": "three-tiers-network-cdk"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "MainVpc919A5E7E"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.35.0"
+                }
+              },
+              "from ThreeTiersNetworkCdkStackWebTierSecurityGroup11506B5D:ALL TRAFFIC": {
+                "id": "from ThreeTiersNetworkCdkStackWebTierSecurityGroup11506B5D:ALL TRAFFIC",
+                "path": "ThreeTiersNetworkCdkStack/AppTierSecurityGroup/from ThreeTiersNetworkCdkStackWebTierSecurityGroup11506B5D:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "-1",
+                    "description": "allow all traffic from web-tier-sg",
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "AppTierSecurityGroupEDEC7923",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "WebTierSecurityGroupC6AAA4C0",
+                        "GroupId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.35.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.35.0"
+            }
+          },
+          "DatabaseTierSecurityGroup": {
+            "id": "DatabaseTierSecurityGroup",
+            "path": "ThreeTiersNetworkCdkStack/DatabaseTierSecurityGroup",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ThreeTiersNetworkCdkStack/DatabaseTierSecurityGroup/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "security group for database",
+                    "groupName": "db-tier-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "tags": [
+                      {
+                        "key": "Project",
+                        "value": "three-tiers-network-cdk"
+                      }
+                    ],
+                    "vpcId": {
+                      "Ref": "MainVpc919A5E7E"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.35.0"
+                }
+              },
+              "from ThreeTiersNetworkCdkStackAppTierSecurityGroupCCB9A037:3306": {
+                "id": "from ThreeTiersNetworkCdkStackAppTierSecurityGroupCCB9A037:3306",
+                "path": "ThreeTiersNetworkCdkStack/DatabaseTierSecurityGroup/from ThreeTiersNetworkCdkStackAppTierSecurityGroupCCB9A037:3306",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "description": "allow traffic on port 3306 from app-tier-sg",
+                    "fromPort": 3306,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "DatabaseTierSecurityGroup282AA341",
+                        "GroupId"
+                      ]
+                    },
+                    "sourceSecurityGroupId": {
+                      "Fn::GetAtt": [
+                        "AppTierSecurityGroupEDEC7923",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 3306
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.35.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.35.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "ThreeTiersNetworkCdkStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "ThreeTiersNetworkCdkStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.35.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.88"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.35.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.35.0"
+    }
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "version": "20.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "ThreeTiersNetworkCdkStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ThreeTiersNetworkCdkStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ThreeTiersNetworkCdkStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://824709318323/ap-south-1",
+      "properties": {
+        "templateFile": "ThreeTiersNetworkCdkStack.template.json",
+        "tags": {
+          "Project": "three-tiers-network-cdk"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::824709318323:role/cdk-hnb659fds-deploy-role-824709318323-ap-south-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::824709318323:role/cdk-hnb659fds-cfn-exec-role-824709318323-ap-south-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-824709318323-ap-south-1/caba04d583a331e624f36a1d7cdf6ae04d6af58b2368b4f2563c2c3cc89033e8.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ThreeTiersNetworkCdkStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::824709318323:role/cdk-hnb659fds-lookup-role-824709318323-ap-south-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ThreeTiersNetworkCdkStack.assets"
+      ],
+      "metadata": {
+        "/ThreeTiersNetworkCdkStack": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "Project",
+                "Value": "three-tiers-network-cdk"
+              }
+            ]
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpc919A5E7E"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet1Subnet269349B1"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet1RouteTableB35CB547"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet1RouteTableAssociation12179C27"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet1DefaultRouteA089B896"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet1EIP33B08611"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet1NATGatewayEEC1F6AE"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet2Subnet287D062B"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet2RouteTableE69B5772"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet2RouteTableAssociationDA7BB36E"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPublicSubnet2DefaultRoute3AE7286A"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet1SubnetA8D0757B"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet1RouteTable9385ABF4"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet1RouteTableAssociation628BDBF6"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet1DefaultRoute7A3E1735"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet2SubnetFC4F66C4"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet2RouteTable8E0D12CB"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet2RouteTableAssociationE83CB470"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcPrivateSubnet2DefaultRoute986F5D29"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcIGW53625DB6"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcVPCGWBA74F963"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/MainVpc/S3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MainVpcS35C084C4F"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/WebTierSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebTierSecurityGroupC6AAA4C0"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/AppTierSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppTierSecurityGroupEDEC7923"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/AppTierSecurityGroup/from ThreeTiersNetworkCdkStackWebTierSecurityGroup11506B5D:ALL TRAFFIC": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppTierSecurityGroupfromThreeTiersNetworkCdkStackWebTierSecurityGroup11506B5DALLTRAFFIC192D5873"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/DatabaseTierSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabaseTierSecurityGroup282AA341"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/DatabaseTierSecurityGroup/from ThreeTiersNetworkCdkStackAppTierSecurityGroupCCB9A037:3306": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabaseTierSecurityGroupfromThreeTiersNetworkCdkStackAppTierSecurityGroupCCB9A03733061E3D5065"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ThreeTiersNetworkCdkStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ThreeTiersNetworkCdkStack"
+    }
+  }
+}
