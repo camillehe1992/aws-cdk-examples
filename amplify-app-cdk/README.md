@@ -1,6 +1,30 @@
 # Static Website with AWS Amplify and CDK
 
-This is a blank project for CDK development with TypeScript.
+In this project, I use AWS Amplify to host a sample Vue application as a static website.
+
+The figure below shows the AWS services and the steps involved in deploying the sample Vue application using Amplify and CDK.
+
+1. Build static websites or the frontend of a full stack application and commit the code to any of the repositories GitLab, GitHub or AWS CodeCommit. Here I use GitHub to host a simple Vue application.
+2. Setup AWS CDK project, build and deploy the CDK code to the target AWS region to create the Amplify application.
+3. The CDK code will be converted to a CloudFormation template which will be deployed in the target region to create the Amplify Application.
+4. Any subsequent commits will trigger the Amplify continuous deployment pipeline which will fork the code from the configured repository. For GitLab and GitHub, AWS Secrets Manager can be used to store the personal access token which provides Amplify the permission to access the repository.
+5. Amplify will generate a shareable URL which can be used to access the application from the internet.
+
+![](../images/amplify.png)
+
+## Setup
+
+```sh
+# cp .env.sample to .env and update your AWS account/region
+# Install dependencies
+npm install
+
+# Deloy stacks into your AWS account/region
+npm run deploy
+
+# Destroy stacks from your AWS account/region
+npm run destroy
+```
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
