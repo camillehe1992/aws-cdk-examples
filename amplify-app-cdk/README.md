@@ -10,7 +10,7 @@ The figure below shows the AWS services and the steps involved in deploying the 
 4. Any subsequent commits will trigger the Amplify continuous deployment pipeline which will fork the code from the configured repository. For GitLab and GitHub, AWS Secrets Manager can be used to store the personal access token which provides Amplify the permission to access the repository.
 5. Amplify will generate a shareable URL which can be used to access the application from the internet.
 
-![](../images/amplify.png)
+<img src="../images/amplify.png" alt="Archtecture Diagram" title="Archtecture Diagram">
 
 **Notes**:
 

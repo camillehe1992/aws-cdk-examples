@@ -6,7 +6,7 @@ The following diagram illustrates this use case. There are two Availability Zone
 
 Besides, I created a S3 Gateway endpoint to enable private connectivity between VPC and S3, so that applications in VPC can access S3 service via this endpoint directly.
 
-![](../images/public-nat-gateway-diagram.png)
+<img src="../images/public-nat-gateway-diagram.png" alt="Archtecture Diagram" title="Archtecture Diagram">
 
 ## Setup
 
