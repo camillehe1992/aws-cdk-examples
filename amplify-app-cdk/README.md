@@ -12,10 +12,14 @@ The figure below shows the AWS services and the steps involved in deploying the 
 
 ![](../images/amplify.png)
 
+**Notes**:
+
+1. To create a personal github access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
 ## Setup
 
 ```sh
-# cp .env.sample to .env and update your AWS account/region
+# cp .env.sample to .env and update your AWS account/region as well as GITHUB_OAUTH_TOKEN generated before
 # Install dependencies
 npm install
 
