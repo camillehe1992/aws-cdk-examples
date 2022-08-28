@@ -14,7 +14,8 @@ The figure below shows the AWS services and the steps involved in deploying the 
 
 **Notes**:
 
-1. To create a personal github access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+1. I created a sample Vue application for demo purpose, see `https://github.com/camillehe1992/sample-vue3-app`, you can take it as a reference. If you want to deploy your own project using Amplify, feel free to create one and commit the code to any of the repositories GitLab, GitHub or AWS CodeCommit, then generate a personal access token so that any subsequent commits will trigger the Amplify continuous deployment pipeline.
+2. Here is a guide to create a personal GitHub access token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token.
 
 ## Setup
 
