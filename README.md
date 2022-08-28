@@ -11,6 +11,7 @@ This repo provides a variety of examples to setup AWS infrastructure using AWS C
 
 ## CDK Projects
 
-| Project                                               | Use case                                                                 | Keywords     |
-| ----------------------------------------------------- | ------------------------------------------------------------------------ | ------------ |
-| [three-tiers-network-cdk](./three-tiers-network-cdk/) | Create a VPC with internet access and a three tiers network archtecture. | VPC, Network |
+| Project                                               | Use case                                                                 | Keywords                     |
+| ----------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------- |
+| [three-tiers-network-cdk](./three-tiers-network-cdk/) | Create a VPC with internet access and a three tiers network archtecture. | VPC, Network                 |
+| [amplify-app-cdk](./amplify-app-cdk/)                 | Deploy a Static Website (Vue) with AWS Amplify and CDK                   | Amplify, Vue, Secret Manager |
