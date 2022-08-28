@@ -30,20 +30,26 @@ export class AmplifyAppCdkStack extends Stack {
           phases: {
             preBuild: {
               commands: [
-                'npm install',
+                'npm ci',
               ],
             },
             build: {
               commands: [
-                'npm build',
+                'npm run build',
               ],
             },
           },
           artifacts: {
-            baseDirectory: 'public',
-            files:
-            - '**/*',
+            baseDirectory: 'dist',
+            files: [
+              '**/*'
+            ]
           },
+          cache: {
+            paths: [
+              'nnode_modules/**/*'
+            ]
+          }
         },
       }),
     });
