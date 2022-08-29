@@ -1,8 +1,8 @@
 {
-  "name": "template-app",
+  "name": "static-site-s3-cdk",
   "version": "0.1.0",
   "bin": {
-    "template-app": "bin/template-app.js"
+    "static-site-s3-cdk": "bin/static-site-s3-cdk.js"
   },
   "scripts": {
     "build": "tsc && cdk synth -o cloudformation",
