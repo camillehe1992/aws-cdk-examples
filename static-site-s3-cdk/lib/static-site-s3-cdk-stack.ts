@@ -19,10 +19,13 @@ export class StaticSiteS3CdkStack extends Stack {
       bucketName: props?.bucketName,
       publicReadAccess: false,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-      removalPolicy: RemovalPolicy.RETAIN,
       accessControl: s3.BucketAccessControl.PRIVATE,
       objectOwnership: s3.ObjectOwnership.BUCKET_OWNER_ENFORCED,
       encryption: s3.BucketEncryption.S3_MANAGED,
+      // By setting the bucket's removalPolicy to DESTROY and setting the autoDeleteObjects property to true
+      // we were able to empty a bucket's contents and delete it when the stack is deleted.
+      removalPolicy: RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
     });
 
     // create a OAI to access assets on S3 bucket
@@ -46,7 +49,7 @@ export class StaticSiteS3CdkStack extends Stack {
       securityHeadersBehavior: {
         contentSecurityPolicy: {
           override: true,
-          contentSecurityPolicy: "default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'"
+          contentSecurityPolicy: "style-src-elem https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css; script-src-elem https://cdn.jsdelivr.net/npm/docsify@4"
         },
         strictTransportSecurity: {
           override: true,
