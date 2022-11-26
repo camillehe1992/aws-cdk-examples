@@ -17,3 +17,4 @@ This repo provides a variety of examples to setup AWS infrastructure using AWS C
 | [amplify-app-cdk](./amplify-app-cdk/)                 | Deploy a Static Website (Vue) with AWS Amplify and CDK                   | Amplify, Vue, Secret Manager |
 | [static-site-s3-cdk](./static-site-s3-cdk/)           | Deploy a Static Website (docsify) with AWS S3 and CloudFront             | S3, CloudFront               |
 | [kinesis-streaming-cdk](./kinesis-streaming-cdk/)     | Create a Kinesis Data Stream that integrates with Lambda function        | Kinesis Data Stream, Lambda  |
+| [s3-with-ddb-ckd](./s3-with-ddb-cdk/)                 | Create a Simple Content App using S3 and DynamoDB                        | S3, DynamoDB, Lambda         |
