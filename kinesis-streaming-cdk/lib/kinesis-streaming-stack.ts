@@ -9,7 +9,8 @@ import { Construct } from 'constructs';
 
 interface KinesisStreamingCdkProps extends StackProps {
   kdsName: string,
-  kmsAlias: string
+  kmsAlias: string,
+  lambdaName: string
 }
 
 export class KinesisStreamingStack extends Stack {
@@ -38,7 +39,7 @@ export class KinesisStreamingStack extends Stack {
       handler: 'index.handler',
       code: lambda.Code.fromAsset(`${__dirname}/records-process-fn-code`, {}),
       memorySize: 128,
-      functionName: `${id}-${stack.stackName}`,
+      functionName: props?.lambdaName,
       logRetention: cwlogs.RetentionDays.TWO_WEEKS
     });
 

@@ -15,5 +15,6 @@ cdk.Tags.of(app).add('Project', 'kinesis-streaming-cdk');
 new KinesisStreamingStack(app, 'KinesisStreamingStack', { 
   kdsName: 'stailer-ordering-stream',
   kmsAlias: 'stailer-ordering-stream-kms-key',
+  lambdaName: 'stailer-ordering-lambda',
   env 
 });
