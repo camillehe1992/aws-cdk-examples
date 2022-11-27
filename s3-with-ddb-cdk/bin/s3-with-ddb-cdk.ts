@@ -8,5 +8,13 @@ const env = {
   region: process.env.AWS_REGION
 }
 
+const identifier = 's3-with-ddb';
 const app = new cdk.App();
-new S3WithDDBStack(app, 'S3WithDDBStack', { env });
+
+new S3WithDDBStack(app, 'S3WithDDBStack', { 
+  bucketName: `${identifier}-${env.account}-${env.region}`,
+  lambdaName: `${identifier}-event-processor`,
+  tableName: `${identifier}-table`,
+  roleName: `${identifier}-lambda-execution-role`,
+  env
+ });

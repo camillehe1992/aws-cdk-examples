@@ -10,7 +10,8 @@
     "destroy": "cdk destroy",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "refresh": "rm -d -r cdk.out/ cloudformation/"
   },
   "devDependencies": {
     "aws-cdk": "2.35.0",
