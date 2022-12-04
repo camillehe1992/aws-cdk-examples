@@ -1,0 +1,29 @@
+{
+  "name": "opensearch-cdk",
+  "version": "0.1.0",
+  "bin": {
+    "opensearch-cdk": "bin/opensearch-cdk.js"
+  },
+  "scripts": {
+    "build": "tsc && cdk synth -o cloudformation",
+    "deploy": "cdk deploy --all --require-approval never",
+    "destroy": "cdk destroy",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.10",
+    "@types/prettier": "^2.7.1",
+    "jest": "^29.3.1",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.53.0",
+    "constructs": "^10.1.179",
+    "dotenv": "^16.0.3"
+  }
+}
