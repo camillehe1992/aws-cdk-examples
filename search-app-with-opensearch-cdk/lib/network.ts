@@ -29,6 +29,7 @@ export class NetworkStack extends Stack {
     super(scope, id, props);
 
     // Resources
+    // create a vpc with two priviate subnets
     this.vpc = new ec2.Vpc(this, "MainVpc", {
       ipAddresses: ec2.IpAddresses.cidr(props?.vpcCidr || ""),
       natGateways: 0,
@@ -43,7 +44,7 @@ export class NetworkStack extends Stack {
       ],
     });
 
-    // create a security group for a web server tier
+    // create a security group for web tier
     this.webTierSg = new ec2.SecurityGroup(this, "WebTierSecurityGroup", {
       vpc: this.vpc,
       allowAllOutbound: true,
@@ -63,7 +64,7 @@ export class NetworkStack extends Stack {
       "allow HTTP traffic from anywhere on port 80"
     );
 
-    // create a security group for a database server tier
+    // create a security group for database server tier
     this.opensearchSg = new ec2.SecurityGroup(this, "OpenSearchSecurityGroup", {
       vpc: this.vpc,
       allowAllOutbound: true,
@@ -76,7 +77,7 @@ export class NetworkStack extends Stack {
         securityGroups: [this.webTierSg],
       }),
       ec2.Port.tcp(9012),
-      `allow traffic on port 9012 from ${props?.opensearchSgName}`
+      `allow traffic on port 9012 from ${props?.webTierSgName}`
     );
   }
 }
