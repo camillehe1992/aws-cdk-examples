@@ -1,19 +1,72 @@
-import { Duration, Stack, StackProps } from 'aws-cdk-lib';
-import * as sns from 'aws-cdk-lib/aws-sns';
-import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
-import { Construct } from 'constructs';
+import { Stack, StackProps, RemovalPolicy, CfnOutput } from "aws-cdk-lib";
+import { Construct } from "constructs";
+import * as os from "aws-cdk-lib/aws-opensearchservice";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as iam from "aws-cdk-lib/aws-iam";
+
+/***
+ * OpenSearchStack
+ * In this stack, we define a development cluster in AWS OpenSearch, aka AWS ElasticSearch
+ * and all related AWS resources needed to for a search application.
+ *
+ * This stack only enable basic features for demo purpose. Please refer to below link for more features
+ * https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_opensearchservice-readme.html
+ */
+
+interface OpenSearchStackProps extends StackProps {
+  vpc: ec2.Vpc;
+  domainName: string;
+}
 
 export class OpenSearchStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props?: OpenSearchStackProps) {
     super(scope, id, props);
 
-    const queue = new sqs.Queue(this, 'TemplateAppQueue', {
-      visibilityTimeout: Duration.seconds(300)
+    const domain = new os.Domain(this, "Domain", {
+      version: os.EngineVersion.OPENSEARCH_1_3,
+      removalPolicy: RemovalPolicy.DESTROY,
+      vpc: props?.vpc,
+      vpcSubnets: [
+        {
+          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+        },
+      ],
+      // must be enabled since our VPC contains multiple private subnets.
+      zoneAwareness: {
+        enabled: true,
+      },
+      capacity: {
+        // must be an even number since the default az count is 2.
+        dataNodes: 2,
+      },
+      ebs: {
+        volumeSize: 10,
+        volumeType: ec2.EbsDeviceVolumeType.GENERAL_PURPOSE_SSD,
+      },
+      useUnsignedBasicAuth: true,
+      enforceHttps: true,
+      nodeToNodeEncryption: true,
+      encryptionAtRest: {
+        enabled: true,
+      },
+      fineGrainedAccessControl: {
+        masterUserName: "root",
+      },
+      accessPolicies: [
+        new iam.PolicyStatement({
+          actions: ["es:*ESHttpPost", "es:ESHttpPut*"],
+          effect: iam.Effect.ALLOW,
+          principals: [new iam.AccountPrincipal(props?.env?.account)],
+          resources: ["*"],
+        }),
+      ],
     });
 
-    const topic = new sns.Topic(this, 'TemplateAppTopic');
-
-    topic.addSubscription(new subs.SqsSubscription(queue));
+    // Output
+    new CfnOutput(this, "DomainEndpoint", {
+      value: domain.domainEndpoint,
+      description: "The endpoint of opensearch domain",
+      exportName: "DomainEndpoint",
+    });
   }
 }
