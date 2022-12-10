@@ -1,19 +1,28 @@
-import { Duration, Stack, StackProps } from 'aws-cdk-lib';
-import * as sns from 'aws-cdk-lib/aws-sns';
-import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
-import * as sqs from 'aws-cdk-lib/aws-sqs';
-import { Construct } from 'constructs';
+import { Stack, StackProps, RemovalPolicy, CfnOutput } from "aws-cdk-lib";
+import { Construct } from "constructs";
+import * as s3 from "aws-cdk-lib/aws-s3";
+
+interface TemplateAppStackProps extends StackProps {
+  bucketName: string;
+}
 
 export class TemplateAppStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  public readonly s3Bcuket: s3.Bucket;
+
+  constructor(scope: Construct, id: string, props?: TemplateAppStackProps) {
     super(scope, id, props);
 
-    const queue = new sqs.Queue(this, 'TemplateAppQueue', {
-      visibilityTimeout: Duration.seconds(300)
+    // define the bucket
+    const s3Bucket = new s3.Bucket(this, "Bucket", {
+      bucketName: props?.bucketName,
+      removalPolicy: RemovalPolicy.DESTROY,
     });
 
-    const topic = new sns.Topic(this, 'TemplateAppTopic');
-
-    topic.addSubscription(new subs.SqsSubscription(queue));
+    // create an Output
+    new CfnOutput(this, "BucketName", {
+      value: s3Bucket.bucketName,
+      description: "The name of the s3 bucket",
+      exportName: "avatarsBucket",
+    });
   }
 }
