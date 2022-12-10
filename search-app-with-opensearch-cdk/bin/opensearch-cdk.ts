@@ -11,6 +11,8 @@ const env = {
 
 const app = new cdk.App();
 
+cdk.Tags.of(app).add("Project", "search-app-with-opensearch-cdk");
+
 const network = new NetworkStack(app, "NetworkStack", {
   vpcName: "OpenSearch-VPC",
   vpcCidr: "10.0.0.0/16",
@@ -18,6 +20,7 @@ const network = new NetworkStack(app, "NetworkStack", {
   opensearchSgName: "OpenSearch-SG",
   env,
 });
+
 new OpenSearchStack(app, "OpenSearchStack", {
   vpc: network.vpc,
   domainName: "movies",

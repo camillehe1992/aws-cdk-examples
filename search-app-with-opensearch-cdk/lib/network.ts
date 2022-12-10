@@ -32,17 +32,9 @@ export class NetworkStack extends Stack {
     this.vpc = new ec2.Vpc(this, "MainVpc", {
       ipAddresses: ec2.IpAddresses.cidr(props?.vpcCidr || ""),
       natGateways: 0,
-      natGatewaySubnets: {
-        subnetType: ec2.SubnetType.PUBLIC,
-      },
       maxAzs: 2,
       vpcName: props?.vpcName,
       subnetConfiguration: [
-        {
-          cidrMask: 24,
-          name: "Public",
-          subnetType: ec2.SubnetType.PUBLIC,
-        },
         {
           cidrMask: 28,
           name: "Private",
