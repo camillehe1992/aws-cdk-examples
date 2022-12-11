@@ -4,6 +4,8 @@ import * as os from "aws-cdk-lib/aws-opensearchservice";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import * as iam from "aws-cdk-lib/aws-iam";
 
+import { OpenSearchClientStack } from "./opensearch-client";
+
 /***
  * OpenSearchStack
  * In this stack, we define a development cluster in AWS OpenSearch, aka AWS ElasticSearch
@@ -15,11 +17,14 @@ import * as iam from "aws-cdk-lib/aws-iam";
 
 interface OpenSearchStackProps extends StackProps {
   vpc: ec2.Vpc;
+  webTierSg: ec2.SecurityGroup;
+  opensearchTierSg: ec2.SecurityGroup;
+  lambdaName: string;
   domainName: string;
 }
 
 export class OpenSearchStack extends Stack {
-  constructor(scope: Construct, id: string, props?: OpenSearchStackProps) {
+  constructor(scope: Construct, id: string, props: OpenSearchStackProps) {
     super(scope, id, props);
 
     const domain = new os.Domain(this, "Domain", {
@@ -31,6 +36,7 @@ export class OpenSearchStack extends Stack {
           subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
         },
       ],
+      securityGroups: [props.opensearchTierSg],
       // must be enabled since our VPC contains multiple private subnets.
       zoneAwareness: {
         enabled: true,
@@ -54,7 +60,7 @@ export class OpenSearchStack extends Stack {
       },
       accessPolicies: [
         new iam.PolicyStatement({
-          actions: ["es:*ESHttpPost", "es:ESHttpPut*"],
+          actions: ["es:*ESHttpPost", "es:ESHttpPut*", "es:*ESHttpGet"],
           effect: iam.Effect.ALLOW,
           principals: [new iam.AccountPrincipal(props?.env?.account)],
           resources: ["*"],
@@ -62,11 +68,15 @@ export class OpenSearchStack extends Stack {
       ],
     });
 
-    // Output
-    new CfnOutput(this, "DomainEndpoint", {
-      value: domain.domainEndpoint,
-      description: "The endpoint of opensearch domain",
-      exportName: "DomainEndpoint",
+    const client = new OpenSearchClientStack(this, "OpenSearchClientStack", {
+      lambdaName: props.lambdaName,
+      domainEndpoint: domain.domainEndpoint,
+      domainName: props.domainName,
+      vpc: props.vpc,
+      securityGroups: [props.webTierSg],
+      env: props.env,
     });
+
+    client.node.addDependency(domain);
   }
 }

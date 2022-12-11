@@ -23,6 +23,9 @@ const network = new NetworkStack(app, "NetworkStack", {
 
 new OpenSearchStack(app, "OpenSearchStack", {
   vpc: network.vpc,
-  domainName: "movies",
+  webTierSg: network.webTierSg,
+  opensearchTierSg: network.opensearchSg,
+  lambdaName: "opensearch-client",
+  domainName: "marvel-movies",
   env,
 });
