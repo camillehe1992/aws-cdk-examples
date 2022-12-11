@@ -12,7 +12,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "clear": "rm -R ./lib/*.js ./lib/*.d.ts ./bin/*.js ./bin/*.d.ts cloudformation/"
+    "clear": "rm -R ./lib/*.js ./lib/*.d.ts ./bin/*.js ./bin/*.d.ts cloudformation/ cdk.out/"
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",

@@ -44,6 +44,7 @@ export class OpenSearchStack extends Stack {
       capacity: {
         // must be an even number since the default az count is 2.
         dataNodes: 2,
+        dataNodeInstanceType: "t3.micro.search",
       },
       ebs: {
         volumeSize: 10,

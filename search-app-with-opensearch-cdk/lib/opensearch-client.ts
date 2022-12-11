@@ -1,7 +1,6 @@
 import { Stack, StackProps, Duration } from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as lambda from "aws-cdk-lib/aws-lambda";
-import * as cwlogs from "aws-cdk-lib/aws-logs";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 
@@ -23,33 +22,22 @@ interface OpenSearchClientStackProps extends StackProps {
 }
 
 export class OpenSearchClientStack extends Stack {
-  public readonly fn: lambda.Function;
-
   constructor(scope: Construct, id: string, props: OpenSearchClientStackProps) {
     super(scope, id, props);
 
-    // define a lambda function
-    this.fn = new lambda.Function(this, "Function", {
-      runtime: lambda.Runtime.NODEJS_18_X,
-      handler: "index.handler",
-      code: lambda.Code.fromAsset(`${__dirname}/opensearch-client`, {}),
-      memorySize: 128,
-      functionName: props?.lambdaName,
-      logRetention: cwlogs.RetentionDays.TWO_WEEKS,
-      vpc: props?.vpc,
-      vpcSubnets: {
-        subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
-      },
-      timeout: Duration.seconds(5),
-      environment: {
-        ["OPENSEARCH_DOMAIN_URL"]: props.domainEndpoint,
-        ["INDEX_NAME"]: "movies",
-      },
-      securityGroups: props.securityGroups,
+    // define a lambda function and its execution role
+    const role = new iam.Role(this, "ExecutionRole", {
+      roleName: `${props.lambdaName}-execution-role`,
+      assumedBy: new iam.ServicePrincipal("lambda.amazonaws.com"),
     });
 
-    // define access policy and associate with lambda execution role
-    this.fn.addToRolePolicy(
+    role.addManagedPolicy(
+      iam.ManagedPolicy.fromAwsManagedPolicyName(
+        "service-role/AWSLambdaVPCAccessExecutionRole"
+      )
+    );
+
+    role.addToPolicy(
       new iam.PolicyStatement({
         actions: ["es:ESHttpGet*"],
         resources: [
@@ -58,5 +46,24 @@ export class OpenSearchClientStack extends Stack {
         effect: iam.Effect.ALLOW,
       })
     );
+
+    const fn = new lambda.Function(this, "Function", {
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: "index.handler",
+      code: lambda.Code.fromAsset(`${__dirname}/opensearch-client`, {}),
+      memorySize: 128,
+      functionName: props?.lambdaName,
+      role,
+      vpc: props?.vpc,
+      vpcSubnets: {
+        subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      },
+      securityGroups: props.securityGroups,
+      timeout: Duration.seconds(5),
+      environment: {
+        ["OPENSEARCH_DOMAIN_URL"]: props.domainEndpoint,
+        ["INDEX_NAME"]: "movies",
+      },
+    });
   }
 }
